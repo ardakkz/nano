@@ -1,9 +1,0 @@
-{
-  "ad": "Ahmet",
-  "soyad": "Yılmaz",
-  "yas": 30,
-  "şehir": "İstanbul",
-  "meslek": "Mühendis",
-  "evli_mi": true,
-  "çocuklar": ["Ali", "Ayşe"]
-}
