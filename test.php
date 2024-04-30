@@ -28,8 +28,20 @@ if (empty($input)) {
     exit;
 }
 
-// Gelen veriyi işleme
-$responseData = array('message' => 'Received data successfully', 'data' => $input);
+// Gelen veride test1 ve test2 adında sayılar var mı kontrol etme
+if (!isset($input['test1']) || !isset($input['test2']) || !is_numeric($input['test1']) || !is_numeric($input['test2'])) {
+    http_response_code(400);
+    echo json_encode(array('message' => 'Invalid number data'));
+    exit;
+}
+
+// Sayıları toplama işlemi
+$test1 = intval($input['test1']);
+$test2 = intval($input['test2']);
+$result = $test1 + $test2;
+
+// Yanıtı hazırlama
+$responseData = array('message' => 'Success', 'result' => $result);
 
 // Yanıtı JSON formatında gönderme
 http_response_code(200);
