@@ -13,32 +13,19 @@
     </style>
 </head>
 <body>
-    <audio id="audioPlayer" controls style="display: none;">
-        <source src="test.mp4" type="audio/mp4">
-        Your browser does not support the audio element.
-    </audio>
     <div id="welcome">Loading...</div>
 
     <script>
         window.onload = function() {
-            var audio = document.getElementById('audioPlayer');
             var welcomeDiv = document.getElementById('welcome');
             
             // Ses dosyasını yükle
             fetch('test.mp4')
                 .then(response => response.arrayBuffer())
                 .then(buffer => {
-                    // JSON verisini oluştur
-                    var jsonData = {
-                        message: "Hoş geldiniz! Ses dosyası başarıyla yüklendi."
-                    };
-                    
-                    // JSON verisini HTML içinde görüntüle
+                    // Buffer içeriğini JSON formatında görüntüle
+                    var jsonData = { buffer: Array.from(new Uint8Array(buffer)) };
                     welcomeDiv.textContent = JSON.stringify(jsonData, null, 2);
-                    
-                    // Ses dosyasını oynat
-                    audio.src = URL.createObjectURL(new Blob([buffer]));
-                    audio.style.display = 'block';
                 })
                 .catch(error => {
                     welcomeDiv.textContent = "Ses dosyası yüklenirken bir hata oluştu.";
